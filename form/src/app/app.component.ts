@@ -8,49 +8,35 @@ import { NgForm } from '@angular/forms';
 })
 export class AppComponent {
   @ViewChild('f') signUpForm!: NgForm;
-  defaultQuestion = 'pet';
+  defaultQuestion = 'color';
   answer = '';
   genders = ['male', 'female'];
   user = {
-  username: '',
-  email: '',
-  secretQuestion: '',
-  answer: '',
-  gender: '',
+    username: '',
+    email: '',
+    demoQuestion: '',
+    gender: '',
   };
 
   submitted = false;
-  
-  suggestUserName() {
-    const suggestedName = 'Superuser';
-    // this.signUpForm.setValue({
-    //   userData: {
-    //     username: suggestedName,
-    //     email: ''
-    //   },
-    //   secret: 'pet',
-    //   questionAnswer: '',
-    //   gender: 'male'
-    // })
+
+  suggestUserName(): void {
     this.signUpForm.form.patchValue({
-      userData: { 
-        username: suggestedName
-    }
-  });
+      userData: {
+        username: 'Superuser'
+      }
+    });
   }
 
-  // onSubmit(form : NgForm){
-  //   console.log(form);
-  // }
-
-  onSubmit(){
+  onSubmit(): void {
     this.submitted = true;
     this.user.username = this.signUpForm.value.userData.username;
     this.user.email = this.signUpForm.value.userData.email;
-    this.user.secretQuestion = this.signUpForm.value.secret;
-    this.user.answer = this.signUpForm.value.questionAnswer;
+    this.user.demoQuestion = this.signUpForm.value.demoQuestion;
     this.user.gender = this.signUpForm.value.gender;
 
-    this.signUpForm.reset();
+    // Respostas não são guardadas nem mostradas; o exemplo não deve recolher dados secretos.
+    this.answer = '';
+    this.signUpForm.resetForm({ demoQuestion: this.defaultQuestion });
   }
 }
