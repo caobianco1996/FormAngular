@@ -4,63 +4,70 @@
       <form (ngSubmit)="onSubmit()" #f="ngForm">
         <div id="user-data" ngModelGroup="userData" #userData="ngModelGroup">
           <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" class="form-control" ngModel name="username" required>
+            <label for="username">Nome de demonstração</label>
+            <input type="text" id="username" class="form-control" ngModel name="username" required autocomplete="off">
           </div>
-          <button class="btn btn-default" (click)="suggestUserName()" type="button">Suggest an Username</button>
+          <button class="btn btn-default" (click)="suggestUserName()" type="button">Sugerir nome</button>
           <div class="form-group">
-            <label for="email">Mail</label>
-            <input 
-            type="email" 
-            id="email" 
-            class="form-control" 
-            ngModel 
-            name="email" 
-            required 
-            email 
-            #email="ngModel">
-            <span class="help-block" *ngIf="!email.valid && email.touched">Por favor insira um email Valido</span>
+            <label for="email">E-mail fictício</label>
+            <input
+              type="email"
+              id="email"
+              class="form-control"
+              ngModel
+              name="email"
+              required
+              email
+              autocomplete="off"
+              #email="ngModel">
+            <span class="help-block" role="alert" *ngIf="!email.valid && email.touched">Informe um e-mail válido de demonstração.</span>
           </div>
         </div>
-        <p *ngIf="!userData.valid && userData.touched">User data is invalid</p>
+        <p role="alert" *ngIf="!userData.valid && userData.touched">Confira os campos obrigatórios.</p>
+
         <div class="form-group">
-          <label for="secret">Secret Questions</label>
-          <select id="secret" class="form-control" [ngModel]="defaultQuestion" name="secret">
-            <option value="pet">Your first Pet?</option>
-            <option value="teacher">Your first teacher?</option>
+          <label for="demo-question">Pergunta fictícia</label>
+          <select id="demo-question" class="form-control" [ngModel]="defaultQuestion" name="demoQuestion">
+            <option value="color">Cor favorita?</option>
+            <option value="food">Comida favorita?</option>
           </select>
         </div>
+
         <div class="form-group">
-          <textarea name="questionAnswer" rows="3" class="form-control" [(ngModel)]="answer">
+          <label for="demo-answer">Resposta fictícia (não use senha ou resposta real)</label>
+          <textarea
+            id="demo-answer"
+            name="demoAnswer"
+            rows="3"
+            class="form-control"
+            [(ngModel)]="answer"
+            autocomplete="off">
           </textarea>
-          <p>Your reply: {{answer}}</p>
-          <div class="radio" *ngFor="let gender of genders">
-          <label>
-            <input
-            type="radio"
-            name="gender"
-            ngModel
-            [value]="gender" 
-            required> 
-            {{ gender }}
-            
-          </label>
+          <p>Este exemplo não armazena nem exibe a resposta.</p>
         </div>
-        <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Submit</button>
-      </div>
+
+        <fieldset class="form-group">
+          <legend>Gênero (demonstração)</legend>
+          <div class="radio" *ngFor="let gender of genders">
+            <label>
+              <input type="radio" name="gender" ngModel [value]="gender" required>
+              {{ gender }}
+            </label>
+          </div>
+        </fieldset>
+        <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Validar formulário</button>
       </form>
     </div>
   </div>
   <hr>
-  <div class="row" *ngIf="submitted">
+  <section class="row" *ngIf="submitted" aria-live="polite">
     <div class="col-xs-12">
-      <h3>Your Data</h3>
-      <p>Username: {{user.username}}</p>
-      <p>mail: {{user.email}}</p>
-      <p>Secret question: Your First {{user.secretQuestion}} </p>
-      <p>Answer: {{user.answer}}</p>
-      <p>Gender:{{user.gender}} </p>
-
+      <h2>Dados de demonstração</h2>
+      <p>Nome: {{ user.username }}</p>
+      <p>E-mail: {{ user.email }}</p>
+      <p>Pergunta: {{ user.demoQuestion }}</p>
+      <p>Resposta: não armazenada nem exibida</p>
+      <p>Gênero: {{ user.gender }}</p>
     </div>
-  </div>
+  </section>
 </div>
