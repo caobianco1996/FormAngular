@@ -1,6 +1,6 @@
 # Formulário Angular — template-driven forms
 
-Exemplo didático de formulário Angular baseado em template-driven forms, com validação de e-mail e sugestão de nome. A aplicação fica na pasta form/.
+Exemplo didático Angular de formulário template-driven com validação de e-mail e sugestão de nome. A aplicação fica na pasta form/.
 
 ## Requisitos e execução
 
@@ -28,4 +28,4 @@ O teste usa Karma e pode exigir um navegador compatível. Na verificação manua
 
 ## Limitações
 
-Os dados enviados são exibidos apenas para demonstrar o binding. Não use respostas secretas ou dados pessoais reais. Autenticação e envio para um servidor não estão implementados.
+Os campos e respostas são apenas fictícios e ficam no navegador. A resposta da pergunta demonstrativa não é armazenada nem mostrada após o envio. Não digite senhas, respostas de recuperação ou dados pessoais reais. Autenticação e envio para servidor não estão implementados.
